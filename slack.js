@@ -53,7 +53,7 @@ Slack.prototype.respond = function(query,cb) {
 	if (!cb) {
 		return {text:''};
 	} else {
-		return {text:cb.call(obj)};
+		return cb.call(obj);
 	}
 	
 }
