@@ -46,17 +46,17 @@ From inside an Express.js route, this is as easy as passing in req.body:
 ```
 app.post('/yesman',function(req,res) {
 	
-	var txt = slack.respond(req.body,function() {
+	var reply = slack.respond(req.body,function() {
 		
 		return {
 			text: 'Good point, ' + this.user_name,
 			username: 'Bot'
 		};
 		
-		
 	});
 	
-	res.json(txt);
+	res.json(reply);
 
 });
+
 ```
