@@ -6,6 +6,14 @@ A node module for sending and receiving messages with Slack via webhooks.
 This module should be useful for creating various integrations with Slack, such as
 chat bots!
 
+## Install Slack
+
+node-slack is available via npm:
+
+```
+npm install node-slack
+```
+
 
 Get your custom domain and token from Slack.
 
