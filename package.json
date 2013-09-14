@@ -1,0 +1,17 @@
+{
+  "name": "node-slack",
+  "version": "0.0.0",
+  "description": "Send and receive Slack Webhooks easily!",
+  "main": "slack.js",
+  "dependencies": {
+    "request": "~2.27.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "git@github.com:xoxco/node-slack.git",
+  "author": "Ben Brown <ben@xoxco.com>",
+  "license": "BSD",
+  "readmeFilename": "readme.md"
+}
