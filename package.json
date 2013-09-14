@@ -1,10 +1,10 @@
 {
   "name": "node-slack",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Send and receive Slack Webhooks easily!",
   "main": "slack.js",
   "dependencies": {
-    "request": "~2.27.0"
+    "request": "~2.x"
   },
   "devDependencies": {},
   "scripts": {

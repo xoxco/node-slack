@@ -37,7 +37,7 @@ Slack.prototype.send = function(message,cb) {
 }
 
 
-Slack.prototype.receive = function(query,cb) {
+Slack.prototype.respond = function(query,cb) {
 	
 	var obj = {};
 	
