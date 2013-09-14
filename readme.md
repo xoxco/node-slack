@@ -2,7 +2,7 @@
 
 A node module for sending and receiving messages with Slack via webhooks.
 
-(Slack)[https://slack.com/] is a messaging platform that is easy to integrate with. 
+[Slack](https://slack.com/) is a messaging platform that is easy to integrate with. 
 This module should be useful for creating various integrations with Slack, such as
 chat bots!
 
