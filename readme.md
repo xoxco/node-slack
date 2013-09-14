@@ -46,10 +46,10 @@ From inside an Express.js route, this is as easy as passing in req.body:
 ```
 app.post('/yesman',function(req,res) {
 	
-	var reply = slack.respond(req.body,function() {
+	var reply = slack.respond(req.body,function(hook) {
 		
 		return {
-			text: 'Good point, ' + this.user_name,
+			text: 'Good point, ' + hook.user_name,
 			username: 'Bot'
 		};
 		
