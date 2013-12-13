@@ -23,11 +23,14 @@ Token is provided on the integration setup page.
 
 ```
 var Slack = require('node-slack');
-var slack = new Slack(domain,token);
+var slack = new Slack({
+	domain: 'yourdomain',
+	token: 'yourtoken'
+});
 ```
 
 
-To send a message, call slack.send:
+To send a message, call `slack.send`:
 
 ```
 slack.send({
@@ -37,16 +40,28 @@ slack.send({
 });
 ```
 
+You can give `slack.send` a callback if you want!
+
+```
+slack.send({
+	text: 'Howdy again!',
+	channel: '#foo',
+	username: 'Bot'
+}, function(err, response){
+	res.send(response);
+});
+```
+
 
 To respond to a message, pass the information from the webhook into slack.respond, 
-along with a callback function responsible for returnign a response.
+along with a callback function responsible for returning a response.
 
 From inside an Express.js route, this is as easy as passing in req.body:
 
 ```
 app.post('/yesman',function(req,res) {
 	
-	var reply = slack.respond(req.body,function(hook) {
+	var reply = slack.respond(req.body,function(err, hook) {
 		
 		return {
 			text: 'Good point, ' + hook.user_name,
@@ -59,4 +74,13 @@ app.post('/yesman',function(req,res) {
 
 });
 
+```
+
+You don't need to give `slack.respond` a callback!
+
+```
+app.post('/yesman', function(req, res){
+	var hook = slack.respond(req.body);
+	res.json({text: 'Good point, ' + hook.user_name, username: 'Bot'});
+});
 ```
