@@ -1,46 +1,48 @@
-var request=require('request');
+var request = require('request');
 
-function Slack(domain,token) {
-	this.domain = domain;
-	this.token = token;	
+function Slack(options) {
+	this.domain = null;
+	this.token = null;
+	this.defaultChannel = '#general';
+	if( options && options instanceof Object ){
+		this.domain = options.domain;
+		this.token = options.token;
+		if( options.defaultChannel ) this.defaultChannel = options.defaultChannel;
+	}
 }
 
 Slack.prototype.send = function(message,cb) {
-	
-	
-	if (!message.text) {
-		if (cb) cb.call(null,{message:'No text specified'},null);
-		return;
+	if( !( message && message instanceof Object && message.text ) ) {
+		if( cb && cb instanceof Function ) return cb(new Error('No message'));
+		return 'No message';
 	}
-	if (!message.channel) { message.channel = '#general'; }
-		
-	var command = 'https://' + this.domain + '.slack.com/services/hooks/incoming-webhook?token=' + this.token;
+
+	var url = 'https://' + this.domain + '.slack.com/services/hooks/incoming-webhook?token=' + this.token;
 	var options = {
-		
-		"channel":message.channel,
+		"channel":message.channel || this.defaultChannel,
 		"text": message.text,
 		"username":message.username
-			
 	};
-	
-	request.post({url:command,body:JSON.stringify(options)},function(e,r,body) {
 
-		// done!
-		if (!e && body!='ok') {
-			e = {message:body};
-			body = null;
+	var requestParams = {
+		url:url,
+		body:JSON.stringify(options)
+	}
+
+	request.post(requestParams, function(err,res,body) {
+		if(err || body != 'ok') {
+			if( cb && cb instanceof Function ) return cb(err || body);
 		}
-		if (cb) cb.call(null,e,body);
-				
+
+		if (cb && cb instanceof Function) cb(err,body);
+
 	});
-	
 }
 
 
 Slack.prototype.respond = function(query,cb) {
-	
 	var obj = {};
-	
+
 	obj.token = query.token;
 	obj.team_id = query.team_id;
 	obj.channel_id = query.channel_id;
@@ -49,13 +51,12 @@ Slack.prototype.respond = function(query,cb) {
 	obj.user_id = query.user_id;
 	obj.user_name = query.user_name;
 	obj.text = query.text;
-	
-	if (!cb) {
-		return {text:''};
+
+	if (!( cb && cb instanceof Function ) ) {
+		return obj;
 	} else {
-		return cb.call(null,obj);
+		return cb(null, obj);
 	}
-	
 }
 
 module.exports = Slack;

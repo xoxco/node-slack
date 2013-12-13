@@ -1,14 +1,18 @@
 {
   "name": "node-slack",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Send and receive Slack Webhooks easily!",
   "main": "slack.js",
   "dependencies": {
-    "request": "~2.x"
+    "request": "2.30.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mocha": "1.15.1",
+    "insist": "0.1.0",
+    "sinon": "1.7.3"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha"
   },
   "repository": "git@github.com:xoxco/node-slack.git",
   "author": "Ben Brown <ben@xoxco.com>",
