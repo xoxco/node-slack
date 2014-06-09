@@ -13,6 +13,10 @@ Slack.prototype.send = function(message,cb) {
 		return;
 	}
 	if (!message.channel) { message.channel = '#general'; }
+	if (message.icon_url && message.icon_emoji) {
+		if (cb) cb.call(null,{message:'Icon URL and emoji specified'},null);
+		return;
+	}
 		
 	var command = 'https://' + this.domain + '.slack.com/services/hooks/incoming-webhook?token=' + this.token;
 	var options = {
@@ -22,6 +26,9 @@ Slack.prototype.send = function(message,cb) {
 		"username":message.username
 			
 	};
+	if (message.icon_url) { options.icon_url = message.icon_url; }
+	if (message.icon_emoji) { options.icon_emoji = message.icon_emoji; }
+	if (message.attachments) { options.attachments = message.attachments; }
 	
 	request.post({url:command,body:JSON.stringify(options)},function(e,r,body) {
 
