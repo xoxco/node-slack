@@ -4,6 +4,7 @@
   "description": "Send and receive Slack Webhooks easily!",
   "main": "slack.js",
   "dependencies": {
+    "deferred": "^0.7.1",
     "request": "~2.x"
   },
   "devDependencies": {},
