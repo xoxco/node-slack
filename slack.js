@@ -32,6 +32,7 @@ Slack.prototype.send = function(message, cb) {
 	if (message.icon_url) { options.icon_url = message.icon_url; }
 	if (message.icon_emoji) { options.icon_emoji = message.icon_emoji; }
 	if (message.attachments) { options.attachments = message.attachments; }
+  if (message.unfurl_links) { options.unfurl_links = message.unfurl_links; }
 
   if(!cb) var d = deferred();
 
