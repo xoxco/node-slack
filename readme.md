@@ -56,7 +56,8 @@ slack.send({
 	username: 'Bot',
 	icon_emoji: 'taco',
 	attachments: attachment_array,
-	unfurl_links: true
+	unfurl_links: true,
+	link_names: 1
 });
 ```
 
