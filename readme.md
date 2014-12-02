@@ -14,16 +14,11 @@ node-slack is available via npm:
 npm install node-slack
 ```
 
-
-Get your custom domain and token from Slack.
-
-Domain is the first part of your <domain>.slack.com.
-
-Token is provided on the integration setup page.
+Setup incoming WebHooks for your domain and find Webhook URL text.
 
 ```
 var Slack = require('node-slack');
-var slack = new Slack(domain,token);
+var slack = new Slack(webhookURL);
 ```
 
 If your system requires that requests be made through
@@ -32,7 +27,7 @@ variables https_proxy and http_proxy,
 or pass in the optional third option:
 
 ```
-var slack = new Slack(domain,token,{proxy: http_proxy});
+var slack = new Slack(webhookURL,{proxy: http_proxy});
 ```
 
 To send a message, call slack.send:
