@@ -78,9 +78,9 @@ Slack.prototype.message = function(message, cb) {
   }
   if (!message.channel) { message.channel = '#general'; }
 
-  var command = 'https://' + this.domain + '.slack.com/api/chat.postMessage?token=' + this.token2 + '&channel='+message.channel+'&text='+encodeURI(message.text)+'&username='+encodeURI(message.username);
-  if (message.icon_url) { command.concat("icon_url=",encodeURI(message.icon_url)) }
-  if (message.icon_emoji) { command.concat("icon_emoji=",encodeURI(message.icon_emoji)); }
+  var command = 'https://' + this.domain + '.slack.com/api/chat.postMessage?token=' + this.token2 + '&channel='+encodeURI(message.channel)+'&text='+encodeURI(message.text)+'&username='+encodeURI(message.username);
+  if (message.icon_url) { command.concat("&icon_url=",encodeURI(message.icon_url)) }
+  if (message.icon_emoji) { command.concat("&icon_emoji=",encodeURI(message.icon_emoji)); }
   var option = {
     proxy: (this.http_proxy_options && this.http_proxy_options.proxy) || process.env.https_proxy || process.env.http_proxy,
     url:   command
