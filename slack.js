@@ -3,9 +3,8 @@
 var request  = require('request');
 var deferred = require('deferred');
 
-function Slack(domain, token, http_proxy_options) {
-  this.domain = domain;
-  this.token = token;
+function Slack(hook_url, http_proxy_options) {
+  this.hook_url = hook_url;
   this.http_proxy_options = http_proxy_options;
 }
 
@@ -16,7 +15,7 @@ Slack.prototype.send = function(message, cb) {
   }
   if (!message.channel) { message.channel = '#general'; }
 
-  var command = 'https://' + this.domain + '.slack.com/services/hooks/incoming-webhook?token=' + this.token;
+  var command = this.hook_url;
   var body = {
     channel:  message.channel,
     text:     message.text,
