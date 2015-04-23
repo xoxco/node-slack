@@ -15,11 +15,7 @@ npm install node-slack
 ```
 
 
-Get your custom domain and token from Slack.
-
-Domain is the first part of your <domain>.slack.com.
-
-Token is provided on the integration setup page.
+Get your hook_url from the Slack Incoming Webhooks Integration page.
 
 ```
 var Slack = require('node-slack');
