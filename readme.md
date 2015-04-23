@@ -23,7 +23,7 @@ Token is provided on the integration setup page.
 
 ```
 var Slack = require('node-slack');
-var slack = new Slack(domain,token);
+var slack = new Slack(hook_url,token);
 ```
 
 If your system requires that requests be made through
@@ -32,7 +32,7 @@ variables https_proxy and http_proxy,
 or pass in the optional third option:
 
 ```
-var slack = new Slack(domain,token,{proxy: http_proxy});
+var slack = new Slack(hook_url,{proxy: http_proxy});
 ```
 
 To send a message, call slack.send:
