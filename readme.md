@@ -60,7 +60,7 @@ slack.send({
 
 
 To respond to an [outgoing webhook from slack](https://slack.com/services/new/outgoing-webhook), pass the information from the webhook into slack.respond,
-along with a callback function responsible for returnign a response.
+along with a callback function responsible for returning a response.
 
 From inside an Express.js route, this is as easy as passing in req.body:
 
