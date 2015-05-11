@@ -19,7 +19,7 @@ Get your hook_url from the Slack Incoming Webhooks Integration page.
 
 ```
 var Slack = require('node-slack');
-var slack = new Slack(hook_url,token);
+var slack = new Slack(hook_url,options);
 ```
 
 If your system requires that requests be made through
