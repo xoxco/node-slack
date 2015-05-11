@@ -13,15 +13,14 @@ Slack.prototype.send = function(message, cb) {
     if (cb) cb.call(null,{message:'No text specified'},null);
     return;
   }
-  if (!message.channel) { message.channel = '#general'; }
 
   var command = this.hook_url;
   var body = {
-    channel:  message.channel,
     text:     message.text,
-    username: message.username
   };
-
+  
+  if (message.username) { body.username = message.username; }
+  if (message.channel) { body.channel = message.channel; }
   if (message.icon_url) { body.icon_url = message.icon_url; }
   if (message.icon_emoji) { body.icon_emoji = message.icon_emoji; }
   if (message.attachments) { body.attachments = message.attachments; }
