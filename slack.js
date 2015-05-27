@@ -9,9 +9,11 @@ function Slack(hook_url, http_proxy_options) {
 }
 
 Slack.prototype.send = function(message, cb) {
+  if(!cb) var d = deferred();
+  
   if (!message.text) {
-    if (cb) cb.call(null,{message:'No text specified'},null);
-    return;
+    if (cb) return cb.call(null,{message:'No text specified'},null);
+    if (d) return (d.reject({message:'No text specified'}), d.promise);
   }
 
   var command = this.hook_url;
@@ -32,8 +34,6 @@ Slack.prototype.send = function(message, cb) {
     url:   command,
     body:  JSON.stringify(body)
   };
-
-  if(!cb) var d = deferred();
 
   var req = request.post(option, function(err, res, body) {
     if (!err && body!='ok') {
