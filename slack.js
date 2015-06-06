@@ -9,7 +9,7 @@ function Slack(hook_url, http_proxy_options) {
 }
 
 Slack.prototype.send = function(message, cb) {
-  if (!message.text) {
+  if (message.text == null) {
     if (cb) cb.call(null,{message:'No text specified'},null);
     return;
   }
@@ -18,7 +18,7 @@ Slack.prototype.send = function(message, cb) {
   var body = {
     text:     message.text,
   };
-  
+
   if (message.username) { body.username = message.username; }
   if (message.channel) { body.channel = message.channel; }
   if (message.icon_url) { body.icon_url = message.icon_url; }
