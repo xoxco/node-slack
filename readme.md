@@ -42,7 +42,7 @@ slack.send({
 ```
 
 You can also specify an emoji icon, a url to a custom icon, attachments,
-and any of the other options listed [here](slack.com/services/new/incoming-webhook).
+and any of the other options listed [here](https://slack.com/services/new/incoming-webhook).
 
 
 ```
