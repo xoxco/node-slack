@@ -9,16 +9,16 @@ function Slack(hook_url, http_proxy_options) {
 }
 
 Slack.prototype.send = function(message, cb) {
-  if (!message.text) {
-    if (cb) cb.call(null,{message:'No text specified'},null);
+  // we bail out early with an error in case no message or attachment is provided
+  if (!(message.text || message.attachments)) {
+    cb && cb.call(null, new Error('No text or attachment specified'), null);
     return;
   }
 
   var command = this.hook_url;
-  var body = {
-    text:     message.text,
-  };
-  
+  var body = {};
+
+  if (message.text) { body.text = message.text; }
   if (message.username) { body.username = message.username; }
   if (message.channel) { body.channel = message.channel; }
   if (message.icon_url) { body.icon_url = message.icon_url; }
