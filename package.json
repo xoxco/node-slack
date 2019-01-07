@@ -13,6 +13,6 @@
   },
   "repository": "git@github.com:xoxco/node-slack.git",
   "author": "Ben Brown <ben@xoxco.com>",
-  "license": "BSD",
+  "license": "MIT",
   "readmeFilename": "readme.md"
 }
