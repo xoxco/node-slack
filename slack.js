@@ -35,7 +35,7 @@ Slack.prototype.send = function (message, cb) {
 
   if (!cb) var d = deferred();
 
-  let req = axios.post(config.url, config.data, { headers: config.headers })
+  let req = axios.post(option.url, option.body, {})
     .then((response) => {
       const res = response;
       const body = response.data;
