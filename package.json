@@ -1,6 +1,6 @@
 {
-  "name": "node-slack",
-  "version": "0.0.6",
+  "name": "node-slack-axios",
+  "version": "0.0.8",
   "description": "Send and receive Slack Webhooks easily!",
   "main": "slack.js",
   "dependencies": {
@@ -9,10 +9,10 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
-  "repository": "git@github.com:xoxco/node-slack.git",
-  "author": "Ben Brown <ben@xoxco.com>",
+  "repository": "git@github.com:chennakrishna8/node-slack-axios.git",
+  "author": "chennakrishna sagili <chennakrishna.vision@gmail.com>",
   "license": "MIT",
   "readmeFilename": "readme.md"
 }
