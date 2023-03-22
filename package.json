@@ -1,6 +1,6 @@
 {
   "name": "node-slack-axios",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Send and receive Slack Webhooks easily!",
   "main": "slack.js",
   "dependencies": {

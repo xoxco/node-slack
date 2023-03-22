@@ -1,6 +1,6 @@
 "use strict";
 
-var axios = require('axios');
+var axios = require('axios/dist/node/axios.cjs');
 var deferred = require('deferred');
 
 function Slack(hook_url, http_proxy_options) {
