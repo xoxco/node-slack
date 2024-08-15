@@ -1,6 +1,6 @@
 "use strict";
 
-var request  = require('request');
+var axios = require('axios');
 var deferred = require('deferred');
 
 function Slack(hook_url, http_proxy_options) {
@@ -8,17 +8,17 @@ function Slack(hook_url, http_proxy_options) {
   this.http_proxy_options = http_proxy_options;
 }
 
-Slack.prototype.send = function(message, cb) {
+Slack.prototype.send = function (message, cb) {
   if (!message.text) {
-    if (cb) cb.call(null,{message:'No text specified'},null);
+    if (cb) cb.call(null, { message: 'No text specified' }, null);
     return;
   }
 
   var command = this.hook_url;
   var body = {
-    text:     message.text,
+    text: message.text,
   };
-  
+
   if (message.username) { body.username = message.username; }
   if (message.channel) { body.channel = message.channel; }
   if (message.icon_url) { body.icon_url = message.icon_url; }
@@ -29,27 +29,39 @@ Slack.prototype.send = function(message, cb) {
 
   var option = {
     proxy: (this.http_proxy_options && this.http_proxy_options.proxy) || process.env.https_proxy || process.env.http_proxy,
-    url:   command,
-    body:  JSON.stringify(body)
+    url: command,
+    body: JSON.stringify(body)
   };
 
-  if(!cb) var d = deferred();
+  if (!cb) var d = deferred();
 
-  var req = request.post(option, function(err, res, body) {
-    if (!err && body!='ok') {
-      err = {message: body};
-      body = null;
-    }
-    if (d) return err ? d.reject(err) : d.resolve({res: res, body: body});
-    if (cb) return cb.call(null, err, body);
-    return null;
-  });
+  let req = axios.post(option.url, option.body, {})
+    .then((response) => {
+      const res = response;
+      const body = response.data;
+      if (!body || body !== "ok") {
+        let err = { message: body };
+        throw err;
+      }
+      if (d) {
+        return d.resolve({ res, body });
+      } else if (cb) {
+        return cb.call(null, null, body);
+      }
+    })
+    .catch((error) => {
+      if (d) {
+        d.reject(error || { message: 'Axios Request error' });
+      } else if (cb) {
+        return cb.call(null, error || { message: 'Axios Request error' }, null);
+      }
+    });
 
   return d ? d.promise : req;
 };
 
 
-Slack.prototype.respond = function(query,cb) {
+Slack.prototype.respond = function (query, cb) {
   var obj = {};
 
   obj.token = query.token;
@@ -62,9 +74,9 @@ Slack.prototype.respond = function(query,cb) {
   obj.text = query.text;
 
   if (!cb) {
-    return {text:''};
+    return { text: '' };
   } else {
-    return cb.call(null,obj);
+    return cb.call(null, obj);
   }
 };
 
